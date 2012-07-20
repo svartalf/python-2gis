@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 def smart_str(s, encoding='utf-8', errors='strict'):
     """
     Returns a bytestring version of 's', encoded as specified in 'encoding'.
@@ -17,8 +18,7 @@ def smart_str(s, encoding='utf-8', errors='strict'):
                 # An Exception subclass containing non-ASCII data that doesn't
                 # know how to print itself properly. We shouldn't raise a
                 # further exception.
-                return ' '.join([smart_str(arg, encoding, strings_only,
-                    errors) for arg in s])
+                return ' '.join([smart_str(arg, encoding, errors) for arg in s])
             return unicode(s).encode(encoding, errors)
     elif isinstance(s, unicode):
         return s.encode(encoding, errors)

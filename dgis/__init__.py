@@ -58,7 +58,7 @@ class API(object):
     """
     search = bind_api(
         path='/search',
-        allowed_param=['what', 'where', 'point', 'radius', 'bound', 'sort', 'filters'],
+        allowed_param=['what', 'where', 'point', 'radius', 'bound', 'page', 'pagesize', 'sort', 'filters'],
     )
 
     """Firms search in rubric
@@ -67,5 +67,5 @@ class API(object):
     """
     search_in_rubric = bind_api(
         path='/searchinrubric',
-        allowed_param=['what', 'where', 'point', 'radius', 'bound', 'sort', 'filters'],
+        allowed_param=['what', 'where', 'point', 'radius', 'bound', 'page', 'pagesize', 'sort', 'filters'],
     )
