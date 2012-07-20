@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import json
+import os.path
+import hashlib
 import urlparse
 import urllib
 
@@ -47,11 +50,27 @@ def execute(self, *args, **kwargs):
 
     url = urlparse.urlunparse(['http', self.api.host, self.path, None, urllib.urlencode(parameters), None])
 
-    # TODO: Catch HTTP errors
-    # TODO: check for `response_code` key
-    response = requests.get(url).json
-    if response['response_code'] != '200':
-        raise DgisError(response['response_code'], response['error_message'], response['error_code'])
+    if self.api.cache:
+        hash = hashlib.md5(url).hexdigest()
+        try:
+            os.makedirs('/tmp/2gis-cache')
+        except OSError:
+            pass
+        filename = os.path.join('/tmp/2gis-cache/', hash)
+        if os.path.exists(filename):
+            return json.loads(open(filename).read())
+        else:
+            print 'Request!'
+            response = requests.get(url).json
+            if response['response_code'] != '200':
+                raise DgisError(response['response_code'], response['error_message'], response['error_code'])
+            open(filename, 'w').write(json.dumps(response))
+
+    else:
+        print 'Request!'
+        response = requests.get(url).json
+        if response['response_code'] != '200':
+            raise DgisError(response['response_code'], response['error_message'], response['error_code'])
 
     return response
 
@@ -66,7 +85,7 @@ def bind_api(**config):
         'execute': execute,
     }
 
-    cls = type('APIMethod', (object,), properties)
+    cls = type('API%sMethod' % config['path'].title().replace('/', ''), (object,), properties)
 
     def _call(api, *args, **kwargs):
         return cls(api).execute(*args, **kwargs)

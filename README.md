@@ -4,9 +4,14 @@ A Python library for accessing the 2gis API (http://api.2gis.ru).
 
 ## Versioning and API stability
 
-API stability isn't guaranteed before **1.0.0** version. Versioning is propagated by [semver.org](http://semver.org>).
+API stability isn't guaranteed before **1.3** version. Library version always will match 2GIS API version.
 
-When version **1.0.0** will be released the API will be frozen, and any changes which aren't backwards compatible will force a major version bump.
+## Usage
+
+### Development mode
+
+Because 2GIS allows only 1000 requests per month for testing, library allows to cache results of queries.
+You are disallowed to use cache in real-life projects, see [agreement](http://api.2gis.ru/about/rules/).
 
 ## Contributing
 

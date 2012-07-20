@@ -8,22 +8,24 @@ __version__ = '0.0.2'
 
 
 class API(object):
-    """API ДубльГИС"""
+    """2GIS API"""
 
-    def __init__(self, key, host='catalog.api.2gis.ru', version='1.3'):
+    def __init__(self, key, host='catalog.api.2gis.ru', version='1.3', cache=False):
         """
 
-        Параметры::
-            key : уникальный ключ пользователя API
-            host : базовый URL для запросов
-            version : версия API, с которой идет работа
+        Parameters::
+            key : user API key
+            host : base URL for queries
+            version : API version for working
+            cache : enable cache of the requests
         """
 
         self.key = key
         self.host = host
         self.version = version
+        self.cache = cache
 
-    """Список проектов
+    """Projects lists
 
     http://api.2gis.ru/doc/firms/list/project-list/
     """
@@ -32,7 +34,7 @@ class API(object):
         allowed_param=[],
     )
 
-    """Список городов проекта
+    """List of the project cities
 
     http://api.2gis.ru/doc/firms/list/city-list/
     """
@@ -41,10 +43,29 @@ class API(object):
         allowed_param=['where', 'project_id']
     )
 
-    """Поиск рубрик
+    """Rubrics search
 
-    http://api.2gis.ru/doc/firms/list/rubricator/"""
+    http://api.2gis.ru/doc/firms/list/rubricator/
+    """
     rubricator = bind_api(
         path='/rubricator',
-        allowed_param=['where', 'id', 'parent_id']
+        allowed_param=['where', 'id', 'parent_id'],
+    )
+
+    """Firms search
+
+    http://api.2gis.ru/doc/firms/searches/search/
+    """
+    search = bind_api(
+        path='/search',
+        allowed_param=['what', 'where', 'point', 'radius', 'bound', 'sort', 'filters'],
+    )
+
+    """Firms search in rubric
+
+    http://api.2gis.ru/doc/firms/searches/searchinrubric/
+    """
+    search_in_rubric = bind_api(
+        path='/searchinrubric',
+        allowed_param=['what', 'where', 'point', 'radius', 'bound', 'sort', 'filters'],
     )
