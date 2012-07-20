@@ -76,7 +76,7 @@ class API(object):
     """
     firms_by_filial_id = bind_api(
         path='/firmsByFilialId',
-        allowed_param=['firmid',],
+        allowed_param=['firmid', ],
     )
 
     """Adverts search
@@ -95,4 +95,22 @@ class API(object):
     profile = bind_api(
         path='/profile',
         allowed_param=['id', 'hash'],
+    )
+
+    """Geo search
+
+    http://api.2gis.ru/doc/geo/search/
+    """
+    geo_search = bind_api(
+        path='/geo/search',
+        allowed_param=['q', 'types', 'radius', 'limit', 'project', 'bound', 'format'],
+    )
+
+    # TODO: `types` parameter must be a list or tuple. API must convert it into a string manually
+    # TODO: `bound` parameter must be a list of a 4 float values
+
+    """Information about a geo object"""
+    geo_get = bind_api(
+        path='/geo/search',
+        allowed_param=['id', ],
     )
