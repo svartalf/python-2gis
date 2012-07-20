@@ -60,14 +60,12 @@ def execute(self, *args, **kwargs):
         if os.path.exists(filename):
             return json.loads(open(filename).read())
         else:
-            print 'Request!'
             response = requests.get(url).json
             if response['response_code'] != '200':
                 raise DgisError(response['response_code'], response['error_message'], response['error_code'])
             open(filename, 'w').write(json.dumps(response))
 
     else:
-        print 'Request!'
         response = requests.get(url).json
         if response['response_code'] != '200':
             raise DgisError(response['response_code'], response['error_message'], response['error_code'])
