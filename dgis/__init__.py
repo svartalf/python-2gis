@@ -78,3 +78,12 @@ class API(object):
         path='/firmsByFilialId',
         allowed_param=['firmid',],
     )
+
+    """Adverts search
+
+    http://api.2gis.ru/doc/firms/searches/adssearch/
+    """
+    ads_search = bind_api(
+        path='/ads/search',
+        allowed_param=['what', 'where', 'format', 'page', 'pagesize'],
+    )
