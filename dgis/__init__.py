@@ -69,3 +69,12 @@ class API(object):
         path='/searchinrubric',
         allowed_param=['what', 'where', 'point', 'radius', 'bound', 'page', 'pagesize', 'sort', 'filters'],
     )
+
+    """Firm filials
+
+    http://api.2gis.ru/doc/firms/searches/firmsbyfilialid/
+    """
+    firms_by_filial_id = bind_api(
+        path='/firmsByFilialId',
+        allowed_param=['firmid',],
+    )
