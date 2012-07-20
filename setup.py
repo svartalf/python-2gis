@@ -12,7 +12,7 @@ from setuptools import setup, find_packages
 from dgis import __version__
 
 setup(
-    name='dgis',
+    name='2gis',
     version=__version__,
     author='SvartalF',
     author_email='self@svartalf.info',
@@ -20,6 +20,7 @@ setup(
     description='2gis library for Python',
     long_description=__doc__,
     packages=find_packages(),
+    requires=('requests',),
     classifiers=(
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
