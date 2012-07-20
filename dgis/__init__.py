@@ -4,7 +4,7 @@
 from dgis.binder import bind_api
 
 
-__version__ = '0.3.0'
+__version__ = '0.8'
 
 
 class API(object):

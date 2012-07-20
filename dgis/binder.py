@@ -51,8 +51,10 @@ def execute(self, *args, **kwargs):
     url = urlparse.urlunparse(['http', self.api.host, self.path, None, urllib.urlencode(parameters), None])
 
     if self.api.cache:
+        # TODO: really ugly code
         hash = hashlib.md5(url).hexdigest()
         try:
+            # TODO: user must set root folder for cache
             os.makedirs('/tmp/2gis-cache')
         except OSError:
             pass
