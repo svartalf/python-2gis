@@ -72,6 +72,11 @@ def execute(self, *args, **kwargs):
         if response['response_code'] != '200':
             raise DgisError(response['response_code'], response['error_message'], response['error_code'])
 
+    # Register view if required
+    if self.register_views and self.api.register_views:
+        if requests.get(response['register_bc_url']).text == '0':
+            raise DgisError(404, 'Firm\'s profile view registration cannot be processed', 'registerViewFailed')
+
     return response
 
 
@@ -81,6 +86,7 @@ def bind_api(**config):
         'path': config['path'],
         'method': config.get('method', 'GET'),
         'allowed_param': config['allowed_param'],
+        'register_views': config.get('register_views', False),
         '__init__': __init__,
         'execute': execute,
     }

@@ -4,25 +4,27 @@
 from dgis.binder import bind_api
 
 
-__version__ = '0.8.1'
+__version__ = '0.8.2'
 
 
 class API(object):
     """2GIS API"""
 
-    def __init__(self, key, host='catalog.api.2gis.ru', version='1.3', cache=False):
+    def __init__(self, key, host='catalog.api.2gis.ru', version='1.3', register_views=True, cache=False):
         """
 
         Parameters::
             key : user API key
             host : base URL for queries
             version : API version for working
+            register_views : send information to stats server about a firm profile viewing
             cache : enable cache of the requests
         """
 
         self.key = key
         self.host = host
         self.version = version
+        self.register_views = register_views
         self.cache = cache
 
     """Projects lists
@@ -95,6 +97,7 @@ class API(object):
     profile = bind_api(
         path='/profile',
         allowed_param=['id', 'hash'],
+        register_views=True,
     )
 
     """Geo search
