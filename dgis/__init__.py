@@ -4,7 +4,7 @@
 from dgis.binder import bind_api
 
 
-__version__ = '0.8.2'
+__version__ = '0.8.3'
 
 
 class API(object):
@@ -100,17 +100,26 @@ class API(object):
         register_views=True,
     )
 
-    """Geo search
+    def geo_search(self, **kwargs):
+        """Geo search
 
-    http://api.2gis.ru/doc/geo/search/
-    """
-    geo_search = bind_api(
+        http://api.2gis.ru/doc/geo/search/
+        """
+
+        if 'types' in kwargs:
+            kwargs['types'] = ','.join(kwargs['types'])
+
+        bound = kwargs.pop('bound', False)
+        if bound:
+            kwargs['bound[point1]'] = bound[0]
+            kwargs['bound[point2]'] = bound[1]
+
+        return self._geo_search(**kwargs)
+
+    _geo_search = bind_api(
         path='/geo/search',
         allowed_param=['q', 'types', 'radius', 'limit', 'project', 'bound', 'format'],
     )
-
-    # TODO: `types` parameter must be a list or tuple. API must convert it into a string manually
-    # TODO: `bound` parameter must be a list of a 4 float values
 
     """Information about a geo object"""
     geo_get = bind_api(
