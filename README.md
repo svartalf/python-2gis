@@ -2,6 +2,8 @@
 
 A Python library for accessing the 2gis API (http://api.2gis.ru).
 
+Documentation: http://python-2gis.readthedocs.org
+
 ## Versioning and API stability
 
 API stability isn't guaranteed before **1.3** version. Library version always will match 2GIS API version.
