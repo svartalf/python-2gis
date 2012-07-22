@@ -20,7 +20,7 @@ setup(
     description='2gis library for Python',
     long_description=__doc__,
     packages=find_packages(),
-    requires=('requests',),
+    requires=('requests'),
     classifiers=(
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
