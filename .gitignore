@@ -24,7 +24,7 @@ pip-log.txt
 *.mo
 
 # Documentation
-docs/build
+docs/_build
 
 .env
 .idea
