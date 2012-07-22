@@ -3,8 +3,15 @@
 import json
 import os.path
 import hashlib
-import urlparse
-import urllib
+
+try:
+    import urlparse
+except ImportError:  # Python 3
+    from urllib import parse as urlparse
+try:
+    from urllib import urlencode
+except ImportError:  # Python 3
+    from urllib.parse import urlencode
 
 import requests
 
@@ -48,7 +55,7 @@ def execute(self, *args, **kwargs):
         'output': 'json',
     })
 
-    url = urlparse.urlunparse(['http', self.api.host, self.path, None, urllib.urlencode(parameters), None])
+    url = urlparse.urlunparse(['http', self.api.host, self.path, None, urlencode(parameters), None])
 
     if self.api.cache:
         # TODO: really ugly code
