@@ -9,11 +9,10 @@ A Python library for accessing the 2gis API
 
 from setuptools import setup, find_packages
 
-from dgis import __version__
 
 setup(
     name='2gis',
-    version=__version__,
+    version='0.8.4',
     author='IRK.ru',
     author_email='support@irk.ru',
     url='https://github.com/irkru/python-2gis',
