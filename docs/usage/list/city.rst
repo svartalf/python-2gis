@@ -5,8 +5,8 @@ Documentation: http://api.2gis.ru/doc/firms/list/city-list/
 
 Allowed parameters:
 
-    * where
-    * project_id
+ * where
+ * project_id
 
 Examples
 ----------

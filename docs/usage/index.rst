@@ -32,3 +32,5 @@ API endpoints
     list/index
     list/city
     list/rubricator
+
+    firms/index

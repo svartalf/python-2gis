@@ -54,11 +54,29 @@ class API(object):
         allowed_param=['where', 'id', 'parent_id'],
     )
 
-    """Firms search
+    def search(self, **kwargs):
+        """Firms search
 
-    http://api.2gis.ru/doc/firms/searches/search/
-    """
-    search = bind_api(
+        http://api.2gis.ru/doc/firms/searches/search/
+        """
+
+        point = kwargs.pop('point', False)
+        if point:
+            kwargs['point'] = '%s,%s' % point
+
+        bound = kwargs.pop('bound', False)
+        if bound:
+            kwargs['bound[point1]'] = bound[0]
+            kwargs['bound[point2]'] = bound[1]
+
+        filters = kwargs.pop('filters', False)
+        if filters:
+            for k, v in filters.items():
+                kwargs['filters[%s]' % k] = v
+
+        return self._search(**kwargs)
+
+    _search = bind_api(
         path='/search',
         allowed_param=['what', 'where', 'point', 'radius', 'bound', 'page', 'pagesize', 'sort', 'filters'],
     )
