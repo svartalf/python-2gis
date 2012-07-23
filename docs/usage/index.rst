@@ -22,3 +22,13 @@ All parameters for 2GIS API endpoints are passed as an keyword arguments to the 
     >>> cities = api.city_list(project_id=11)
 
 You should not pass parameters ``output``, ``callback``, ``key`` and ``version`` to all the methods, library do this internally.
+
+API endpoints
+-----------------
+
+.. toctree::
+    :maxdepth: 1
+
+    list/index
+    list/city
+    list/rubricator
