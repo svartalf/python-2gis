@@ -34,3 +34,5 @@ API endpoints
     list/rubricator
 
     firms/index
+    firms/rubric
+    firms/filials

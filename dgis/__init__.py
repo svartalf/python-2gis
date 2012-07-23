@@ -81,13 +81,22 @@ class API(object):
         allowed_param=['what', 'where', 'point', 'radius', 'bound', 'page', 'pagesize', 'sort', 'filters'],
     )
 
-    """Firms search in rubric
+    def search_in_rubric(self, **kwargs):
+        """Firms search in rubric
 
-    http://api.2gis.ru/doc/firms/searches/searchinrubric/
-    """
-    search_in_rubric = bind_api(
+        http://api.2gis.ru/doc/firms/searches/searchinrubric/
+        """
+
+        filters = kwargs.pop('filters', False)
+        if filters:
+            for k, v in filters.items():
+                kwargs['filters[%s]' % k] = v
+
+        return self._search_in_rubric(**kwargs)
+
+    _search_in_rubric = bind_api(
         path='/searchinrubric',
-        allowed_param=['what', 'where', 'point', 'radius', 'bound', 'page', 'pagesize', 'sort', 'filters'],
+        allowed_param=['what', 'where', 'page', 'pagesize', 'sort', 'filters'],
     )
 
     """Firm filials
