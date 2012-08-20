@@ -18,7 +18,7 @@ setup(
     url='https://github.com/irkru/python-2gis',
     description='2gis library for Python',
     long_description=__doc__,
-    # license=open('LICENSE').read(),
+    license='BSD',
     packages=find_packages(),
     requires=('requests'),
     classifiers=(
