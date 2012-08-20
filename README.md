@@ -10,11 +10,6 @@ API stability isn't guaranteed before **1.3** version. Library version always wi
 
 ## Usage
 
-### Development mode
-
-Because 2GIS allows only 1000 requests per month for testing, library allows to cache results of queries.
-You are disallowed to use cache in real-life projects, see [agreement](http://api.2gis.ru/about/rules/).
-
 ### Example
 
     import dgis
@@ -26,4 +21,4 @@ You are disallowed to use cache in real-life projects, see [agreement](http://ap
 
 ## Contributing
 
-If you want to contribute, follow the [pep8](http://www.python.org/dev/peps/pep-0008/) guideline, and include the tests.
+If you want to contribute, follow the [pep8](http://www.python.org/dev/peps/pep-0008/) guideline.

@@ -57,27 +57,7 @@ def execute(self, *args, **kwargs):
 
     url = urlparse.urlunparse(['http', self.api.host, self.path, None, urlencode(parameters), None])
 
-    if self.api.cache:
-        # TODO: really ugly code
-        hash = hashlib.md5(url).hexdigest()
-        try:
-            # TODO: user must set root folder for cache
-            os.makedirs('/tmp/2gis-cache')
-        except OSError:
-            pass
-        filename = os.path.join('/tmp/2gis-cache/', hash)
-        if os.path.exists(filename):
-            return json.loads(open(filename).read())
-        else:
-            response = requests.get(url).json
-            if response['response_code'] != '200':
-                raise DgisError(response['response_code'], response['error_message'], response['error_code'])
-            open(filename, 'w').write(json.dumps(response))
-
-    else:
-        response = requests.get(url).json
-        if response['response_code'] != '200':
-            raise DgisError(response['response_code'], response['error_message'], response['error_code'])
+    response = requests.get(url).json
 
     # Register view if required
     if self.register_views and self.api.register_views:
