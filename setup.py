@@ -20,7 +20,7 @@ setup(
     long_description=__doc__,
     license='BSD',
     packages=find_packages(),
-    requires=('requests'),
+    install_requires=('requests'),
     classifiers=(
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
