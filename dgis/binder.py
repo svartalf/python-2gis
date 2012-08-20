@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import json
-import os.path
-import hashlib
 
 try:
     import urlparse
@@ -62,7 +59,7 @@ def execute(self, *args, **kwargs):
     # Register view if required
     if self.register_views and self.api.register_views:
         if requests.get(response['register_bc_url']).text == '0':
-            raise DgisError(404, 'Firm\'s profile view registration cannot be processed', 'registerViewFailed')
+            raise DgisError(404, 'View registration cannot be processed', 'registerViewFailed')
 
     return response
 
