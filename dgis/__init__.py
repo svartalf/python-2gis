@@ -4,7 +4,7 @@
 from dgis.binder import bind_api
 
 
-__version__ = '0.8.5'
+__version__ = '0.8.6'
 
 
 class API(object):
@@ -43,13 +43,20 @@ class API(object):
         allowed_param=['where', 'project_id']
     )
 
-    """Rubrics search
+    def rubricator(self, **kwargs):
+        """Rubrics search
 
-    http://api.2gis.ru/doc/firms/list/rubricator/
-    """
-    rubricator = bind_api(
+        http://api.2gis.ru/doc/firms/list/rubricator/
+        """
+
+        # `show_children' parameter must be an integer
+        kwargs['show_children'] = int(kwargs.pop('show_children', False))
+
+        return self._rubricator(**kwargs)
+
+    _rubricator = bind_api(
         path='/rubricator',
-        allowed_param=['where', 'id', 'parent_id'],
+        allowed_param=['where', 'id', 'parent_id', 'show_children', 'sort'],
     )
 
     def search(self, **kwargs):

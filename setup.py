@@ -12,7 +12,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='2gis',
-    version='0.8.5',
+    version='0.8.6',
     author='IRK.ru',
     author_email='support@irk.ru',
     url='https://github.com/irkru/python-2gis',
