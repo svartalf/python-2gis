@@ -7,6 +7,9 @@ Allowed parameters:
 
  * what
  * where
+ * point : list of two coordinates [lon, lat]
+ * radius
+ * bound : [[lon1, lat1], [lon2, lat2]]
  * page
  * pagesize
  * sort

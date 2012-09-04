@@ -4,7 +4,7 @@
 from dgis.binder import bind_api
 
 
-__version__ = '0.8.6'
+__version__ = '0.8.7'
 
 
 class API(object):
@@ -101,7 +101,7 @@ class API(object):
 
     _search_in_rubric = bind_api(
         path='/searchinrubric',
-        allowed_param=['what', 'where', 'page', 'pagesize', 'sort', 'filters'],
+        allowed_param=['what', 'where', 'point', 'radius', 'bound', 'page', 'pagesize', 'sort', 'filters'],
     )
 
     """Firm filials
