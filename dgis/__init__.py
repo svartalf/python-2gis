@@ -4,7 +4,7 @@
 from dgis.binder import bind_api
 
 
-__version__ = '0.8.7'
+__version__ = '0.8.8'
 
 
 class API(object):
@@ -110,7 +110,7 @@ class API(object):
     """
     firms_by_filial_id = bind_api(
         path='/firmsByFilialId',
-        allowed_param=['firmid', ],
+        allowed_param=['firmid', 'page' 'pagesize'],
     )
 
     """Adverts search
