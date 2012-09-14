@@ -56,6 +56,9 @@ def execute(self, *args, **kwargs):
 
     response = requests.get(url).json
 
+    if response['response_code'] != '200':
+        raise DgisError(int(response['response_code']), response['error_message'], response['error_code'])
+
     # Register view if required
     if self.register_views and self.api.register_views:
         if requests.get(response['register_bc_url']).text == '0':
