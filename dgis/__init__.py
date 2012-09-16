@@ -92,6 +92,15 @@ class API(object):
         http://api.2gis.ru/doc/firms/searches/searchinrubric/
         """
 
+        point = kwargs.pop('point', False)
+        if point:
+            kwargs['point'] = '%s,%s' % point
+
+        bound = kwargs.pop('bound', False)
+        if bound:
+            kwargs['bound[point1]'] = bound[0]
+            kwargs['bound[point2]'] = bound[1]
+
         filters = kwargs.pop('filters', False)
         if filters:
             for k, v in filters.items():
