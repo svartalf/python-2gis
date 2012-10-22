@@ -21,6 +21,7 @@ setup(
     license='BSD',
     packages=find_packages(),
     install_requires=('requests'),
+    test_suite='tests',
     classifiers=(
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
