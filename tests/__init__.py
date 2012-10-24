@@ -1,27 +1,29 @@
-import os.path
-import random
-import multiprocessing
-from wsgiref.simple_server import make_server
-import unittest
+class MockResponse(object):
+    """Mock replacement for a response object
+    returned by a `requests.get` function"""
 
-import dgis
+    def __init__(self, json):
+        self._json = json
 
+    @property
+    def json(self):
+        return self._json
 
-class BaseTestCase(unittest.TestCase):
+    @property
+    def text(self):
+        """This property is used only with a `register_views` parameter,
+        so we can freely return a '1' text, which means, that view had been registered"""
 
-    @staticmethod
-    def response_handler(environ, start_response):
-        start_response('200 OK', [('Content-Type', 'application/json'),])
+        return '1'
 
-        filename = '%s.json' % environ['PATH_INFO'].strip('/').replace('/', '_')
-        file_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'responses', filename)
+class MockGetRequest(object):
+    """Mock replacement for a `requests.get` function"""
 
-        return open(file_path).read()
+    def __init__(self, validator, json):
+        self.validator = validator
+        self.json = json
 
-    def setUp(self):
-        self.port = random.randint(10000, 65365)
-        server = make_server('', self.port, self.response_handler)
-        self.server_process = multiprocessing.Process(target=server.serve_forever)
-        self.server_process.start()
+    def __call__(self, url):
+        self.validator(url)
 
-        self.api = dgis.API('1234567890', host='127.0.0.1:%s' % self.port, register_views=False)
+        return MockResponse(self.json)
