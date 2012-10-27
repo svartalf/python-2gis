@@ -6,36 +6,18 @@ except ImportError:  # Python 3
     from urllib import parse as urlparse
 import unittest
 
+import six
 import mock
 import dgis
 
-from tests import MockGetRequest
+from tests import MockGetRequest, load_response
 
 
 class RubricatorTest(unittest.TestCase):
 
     def setUp(self):
         # From the `http://api.2gis.ru/doc/firms/list/rubricator/'_
-        self.response = {
-            'api_version': "1.3",
-            'response_code': "200",
-            'parent_id': "140857747439618",
-            'total': "38",
-            'result': [
-                {
-                    'id': "140857747440153",
-                    'name': u"Аквапарки / Водные аттракционы",
-                    'alias': "akvaparki_vodnye_attrakciony",
-                    'parent_id': "140857747439618"
-                },
-                {
-                    'id': "140857747440562",
-                    'name': u"Бани / Сауны",
-                    'alias': "bani_sauny",
-                    'parent_id': "140857747439618"
-                }
-            ]
-        }
+        self.response = load_response('rubricator.json')
 
     def test(self):
         api = dgis.API('1234567890')
@@ -53,4 +35,4 @@ class RubricatorTest(unittest.TestCase):
         validator = MockGetRequest(validate, self.response)
 
         with mock.patch('requests.get', validator):
-            api.rubricator(where=u'Иркутск', show_children=True)
+            api.rubricator(where=six.u('Иркутск'), show_children=True)

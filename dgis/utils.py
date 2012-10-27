@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import six
 
-def smart_str(s, encoding='utf-8', errors='strict'):
+
+def force_text(s, encoding='utf-8', errors='strict'):
     """
     Returns a bytestring version of 's', encoded as specified in 'encoding'.
 
@@ -10,7 +12,7 @@ def smart_str(s, encoding='utf-8', errors='strict'):
     Based on the `django.utils.encoding.smart_str' (https://github.com/django/django/blob/master/django/utils/encoding.py)
     """
 
-    if not isinstance(s, basestring):
+    if not isinstance(s, six.string_types):
         try:
             return str(s)
         except UnicodeEncodeError:
@@ -20,7 +22,7 @@ def smart_str(s, encoding='utf-8', errors='strict'):
                 # further exception.
                 return ' '.join([smart_str(arg, encoding, errors) for arg in s])
             return unicode(s).encode(encoding, errors)
-    elif isinstance(s, unicode):
+    elif isinstance(s, six.text_type):
         return s.encode(encoding, errors)
     elif s and encoding != 'utf-8':
         return s.decode('utf-8', errors).encode(encoding, errors)

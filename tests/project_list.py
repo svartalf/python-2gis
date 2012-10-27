@@ -9,39 +9,14 @@ import unittest
 import mock
 import dgis
 
-from tests import MockGetRequest
+from tests import MockGetRequest, load_response
 
 
 class ProjectListTest(unittest.TestCase):
 
     def setUp(self):
         # From the `http://api.2gis.ru/doc/firms/list/project-list/'_
-        self.response = {
-            'api_version': "1.3",
-            'response_code': "200",
-            'total': 69,
-            'result': [
-                {
-                    'id': 1,
-                    'name': u"Новосибирск",
-                    'code': "novosibirsk",
-                    'language': "ru",
-                    'timezone': "Asia/Novosibirsk",
-                    'min_zoomlevel': 9,
-                    'max_zoomlevel': 17,
-                    'centroid': "POINT(83.062249469999145 54.956108471916146)",
-                    'transport': True,
-                    'traffic': True,
-                    'flamp': True,
-                    'zoomlevel': 11,
-                    'firmscount': 42839,
-                    'filialscount': 60975,
-                    'rubricscount': 953,
-                    'geoscount': 143452,
-                    'country_code': "ru"
-                }
-            ]
-        }
+        self.response = load_response('project_list.json')
 
     def test(self):
         api = dgis.API('1234567890')

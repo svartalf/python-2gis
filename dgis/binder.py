@@ -13,7 +13,7 @@ except ImportError:  # Python 3
 import requests
 
 from dgis.exceptions import DgisError
-from dgis.utils import smart_str
+from dgis.utils import force_text
 
 __all__ = ('bind_api',)
 
@@ -33,7 +33,7 @@ def execute(self, *args, **kwargs):
             continue
 
         try:
-            parameters[self.allowed_param[idx]] = smart_str(arg)
+            parameters[self.allowed_param[idx]] = force_text(arg)
         except IndexError:
             raise ValueError('Too many parameters supplied')
 
@@ -44,7 +44,7 @@ def execute(self, *args, **kwargs):
 
         if key in parameters:
             raise ValueError('Multiple values for parameter %s supplied' % key)
-        parameters[key] = smart_str(arg)
+        parameters[key] = force_text(arg)
 
     parameters.update({
         'key': self.api.key,

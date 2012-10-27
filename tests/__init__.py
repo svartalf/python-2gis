@@ -1,3 +1,7 @@
+import os.path
+import json
+
+
 class MockResponse(object):
     """Mock replacement for a response object
     returned by a `requests.get` function"""
@@ -27,3 +31,11 @@ class MockGetRequest(object):
         self.validator(url)
 
         return MockResponse(self.json)
+
+
+def load_response(filename):
+    try:
+        f = open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'responses', filename))
+        return json.load(f)
+    finally:
+        f.close()

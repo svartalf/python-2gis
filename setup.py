@@ -12,7 +12,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='2gis',
-    version='0.8.8',
+    version='0.8.9',
     author='IRK.ru',
     author_email='support@irk.ru',
     url='https://github.com/irkru/python-2gis',
@@ -20,10 +20,10 @@ setup(
     long_description=__doc__,
     license='BSD',
     packages=find_packages(),
-    install_requires=('requests'),
+    install_requires=('requests', 'six'),
     test_suite='tests',
     classifiers=(
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
@@ -31,6 +31,7 @@ setup(
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Software Development :: Libraries',
     ),
