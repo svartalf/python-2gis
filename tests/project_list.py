@@ -1,15 +1,21 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import unicode_literals
+
+import os
 try:
     import urlparse
 except ImportError:  # Python 3
     from urllib import parse as urlparse
-import unittest
+try:
+    import unittest2 as unittest
+except ImportError:
+    import unittest
 
 import mock
 import dgis
 
-from tests import MockGetRequest, load_response
+from tests import MockGetRequest, load_response, skip_if_no_api_key
 
 
 class ProjectListTest(unittest.TestCase):
@@ -32,3 +38,11 @@ class ProjectListTest(unittest.TestCase):
 
         with mock.patch('requests.get', validator):
             api.project_list()
+
+    @skip_if_no_api_key
+    def test_real(self):
+        api = dgis.API(os.environ['DGIS_KEY'])
+        response = api.project_list()
+
+        self.assertGreater(response['total'], 0)
+        self.assertEqual(response['total'], len(response['result']))

@@ -1,16 +1,21 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import unicode_literals
+
+import os
 try:
     import urlparse
 except ImportError:  # Python 3
     from urllib import parse as urlparse
-import unittest
+try:
+    import unittest2 as unittest
+except ImportError:
+    import unittest
 
-import six
 import mock
 import dgis
 
-from tests import MockGetRequest, load_response
+from tests import MockGetRequest, load_response, skip_if_no_api_key
 
 
 class RubricatorTest(unittest.TestCase):
@@ -19,6 +24,7 @@ class RubricatorTest(unittest.TestCase):
         # From the `http://api.2gis.ru/doc/firms/list/rubricator/'_
         self.response = load_response('rubricator.json')
 
+    @unittest.skipIf(False, '')
     def test(self):
         api = dgis.API('1234567890')
 
@@ -35,4 +41,12 @@ class RubricatorTest(unittest.TestCase):
         validator = MockGetRequest(validate, self.response)
 
         with mock.patch('requests.get', validator):
-            api.rubricator(where=six.u('Иркутск'), show_children=True)
+            api.rubricator(where='Иркутск', show_children=True)
+
+
+    @skip_if_no_api_key
+    def test_real(self):
+        api = dgis.API(os.environ['DGIS_KEY'])
+        response = api.rubricator(where='Иркутск', show_children=True)
+
+        self.assertEqual(int(response['total']), len(response['result']))

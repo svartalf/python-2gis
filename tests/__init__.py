@@ -1,5 +1,17 @@
-import os.path
+import os
 import json
+import functools
+try:
+    import unittest2 as unittest
+except ImportError:
+    import unittest
+
+
+def skip_if_no_api_key(func):
+    wrapper = unittest.skipIf('DGIS_KEY' not in os.environ,
+        'Set environment variable DGIS_KEY to test real requests')
+
+    return wrapper(func)
 
 
 class MockResponse(object):
@@ -19,6 +31,7 @@ class MockResponse(object):
         so we can freely return a '1' text, which means, that view had been registered"""
 
         return '1'
+
 
 class MockGetRequest(object):
     """Mock replacement for a `requests.get` function"""
