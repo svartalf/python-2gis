@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import types
+import inspect
 try:
     import urlparse
 except ImportError:  # Python 3
@@ -55,7 +55,7 @@ def execute(self, *args, **kwargs):
     url = urlparse.urlunparse(['http', self.api.host, self.path, None, urlencode(parameters), None])
 
     response = requests.get(url).json
-    if isinstance(response, types.FunctionType):
+    if inspect.ismethod(response):
         response = response()
 
     if response['response_code'] != '200':
