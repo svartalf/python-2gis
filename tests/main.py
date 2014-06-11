@@ -2,7 +2,10 @@ try:
     import urlparse
 except ImportError:  # Python 3
     from urllib import parse as urlparse
-import unittest
+try:
+    import unittest2 as unittest
+except ImportError:
+    import unittest
 
 import mock
 import dgis
