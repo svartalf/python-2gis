@@ -15,7 +15,7 @@ setup(
     version='1.3.0',
     author='svartalf',
     author_email='self@svartalf.info',
-    url='https://github.com/irkru/python-2gis',
+    url='https://github.com/svartalf/python-2gis',
     description='2gis library for Python',
     long_description=__doc__,
     license='BSD',

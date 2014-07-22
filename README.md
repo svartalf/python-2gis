@@ -1,6 +1,6 @@
 # python-2gis
 
-[![Build Status](https://travis-ci.org/irkru/python-2gis.svg?branch=master)](https://travis-ci.org/irkru/python-2gis)
+[![Build Status](https://travis-ci.org/svartalf/python-2gis.svg?branch=master)](https://travis-ci.org/svartalf/python-2gis)
 
 A Python library for accessing the 2gis API (http://api.2gis.ru).
 
