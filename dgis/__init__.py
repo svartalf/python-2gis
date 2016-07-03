@@ -67,7 +67,7 @@ class API(object):
 
         point = kwargs.pop('point', False)
         if point:
-            kwargs['point'] = '%s,%s' % point
+            kwargs['point'] = '%s,%s' % (point[0], point[1])
 
         bound = kwargs.pop('bound', False)
         if bound:
